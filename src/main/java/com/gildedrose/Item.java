@@ -1,5 +1,5 @@
 package com.gildedrose;
-
+//CANNOT MODIFY THIS
 public class Item {
 
     public String name;
