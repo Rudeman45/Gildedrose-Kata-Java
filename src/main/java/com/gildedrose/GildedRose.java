@@ -35,7 +35,7 @@ class GildedRose {
 
     private void doUpdateQualityDefault(Item item) {
         doUpdateQualityMinQuality(item);
-        item.sellIn = item.sellIn - 1;
+        doUpdateSellInDecrease(item);
         if (item.sellIn < 0) doUpdateQualityMinQuality(item);
     }
     private void doUpdateQualityConjured(Item item){
@@ -52,12 +52,12 @@ class GildedRose {
                 doUpdateQualityMaxQuality(item);
             }
         }
-        item.sellIn = item.sellIn - 1;
+        doUpdateSellInDecrease(item);
         if (item.sellIn < 0) item.quality = 0;
     }
     private void doUpdateQualityAgedBrie(Item item) {
         doUpdateQualityMaxQuality(item);
-        item.sellIn = item.sellIn - 1;
+        doUpdateSellInDecrease(item);
         if (item.sellIn < 0) doUpdateQualityMaxQuality(item);
     }
     private void doUpdateQualityMaxQuality(Item item) {
@@ -69,5 +69,8 @@ class GildedRose {
         if (item.quality > 0) {
             item.quality = item.quality - 1;
         }
+    }
+    private void doUpdateSellInDecrease(Item item) {
+        item.sellIn = item.sellIn - 1;
     }
 }
