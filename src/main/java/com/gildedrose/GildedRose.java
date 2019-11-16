@@ -24,6 +24,8 @@ class GildedRose {
             case "Sulfuras, Hand of Ragnaros":
                 break;
                 //Modification for the new item: Conjured mana cakes
+            case "Conjured Mana Cake":
+                break;
             default:
                 doUpdateQualityDefault(item);
                 break;
@@ -31,14 +33,10 @@ class GildedRose {
     }
 
     private void doUpdateQualityDefault(Item item) {
-        if (item.quality > 0) {
-            item.quality = item.quality - 1;
-        }
+        doUpdateQualityMinQuality(item);
         item.sellIn = item.sellIn - 1;
         if (item.sellIn < 0) {
-            if (item.quality > 0) {
-                item.quality = item.quality - 1;
-            }
+            doUpdateQualityMinQuality(item);
         }
     }
 
@@ -67,6 +65,11 @@ class GildedRose {
     private void doUpdateQualityMaxQuality(Item item) {
         if (item.quality < 50) {
             item.quality = item.quality + 1;
+        }
+    }
+    private void doUpdateQualityMinQuality(Item item) {
+        if (item.quality > 0) {
+            item.quality = item.quality - 1;
         }
     }
 }
