@@ -43,9 +43,8 @@ class GildedRose {
     }
 
     private void doUpdateQualityBackstagePasses(Item item) {
-        if (item.quality < 50) {
-            item.quality = item.quality + 1;
-
+        doUpdateQualityMaxQuality(item);
+        {
             if (item.sellIn < 11) {
                 doUpdateQualityMaxQuality(item);
             }
