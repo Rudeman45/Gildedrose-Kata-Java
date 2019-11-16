@@ -47,14 +47,10 @@ class GildedRose {
             item.quality = item.quality + 1;
 
             if (item.sellIn < 11) {
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
-                }
+                doUpdateQualityMaxQuality(item);
             }
             if (item.sellIn < 6) {
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
-                }
+                doUpdateQualityMaxQuality(item);
             }
         }
         item.sellIn = item.sellIn - 1;
@@ -62,16 +58,16 @@ class GildedRose {
             item.quality = 0;
         }
     }
-
     private void doUpdateQualityAgedBrie(Item item) {
-        if (item.quality < 50) {
-            item.quality = item.quality + 1;
-        }
+        doUpdateQualityMaxQuality(item);
         item.sellIn = item.sellIn - 1;
         if (item.sellIn < 0) {
-            if (item.quality < 50) {
-                item.quality = item.quality + 1;
-            }
+            doUpdateQualityMaxQuality(item);
+        }
+    }
+    private void doUpdateQualityMaxQuality(Item item) {
+        if (item.quality < 50) {
+            item.quality = item.quality + 1;
         }
     }
 }
