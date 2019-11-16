@@ -24,6 +24,9 @@ class GildedRose {
             case "Sulfuras, Hand of Ragnaros":
                 break;
                 //Modification for the new item: Conjured mana cakes
+            case "Conjured Mana Cake":
+                doUpdateQualityConjured(item);
+                break;
             default:
                 doUpdateQualityDefault(item);
                 break;
@@ -31,17 +34,14 @@ class GildedRose {
     }
 
     private void doUpdateQualityDefault(Item item) {
-        if (item.quality > 0) {
-            item.quality = item.quality - 1;
-        }
+        doUpdateQualityMinQuality(item);
         item.sellIn = item.sellIn - 1;
-        if (item.sellIn < 0) {
-            if (item.quality > 0) {
-                item.quality = item.quality - 1;
-            }
-        }
+        if (item.sellIn < 0) doUpdateQualityMinQuality(item);
     }
-
+    private void doUpdateQualityConjured(Item item){
+        doUpdateQualityDefault(item);
+        doUpdateQualityMinQuality(item);
+    }
     private void doUpdateQualityBackstagePasses(Item item) {
         doUpdateQualityMaxQuality(item);
         {
@@ -53,20 +53,21 @@ class GildedRose {
             }
         }
         item.sellIn = item.sellIn - 1;
-        if (item.sellIn < 0) {
-            item.quality = 0;
-        }
+        if (item.sellIn < 0) item.quality = 0;
     }
     private void doUpdateQualityAgedBrie(Item item) {
         doUpdateQualityMaxQuality(item);
         item.sellIn = item.sellIn - 1;
-        if (item.sellIn < 0) {
-            doUpdateQualityMaxQuality(item);
-        }
+        if (item.sellIn < 0) doUpdateQualityMaxQuality(item);
     }
     private void doUpdateQualityMaxQuality(Item item) {
         if (item.quality < 50) {
             item.quality = item.quality + 1;
+        }
+    }
+    private void doUpdateQualityMinQuality(Item item) {
+        if (item.quality > 0) {
+            item.quality = item.quality - 1;
         }
     }
 }
